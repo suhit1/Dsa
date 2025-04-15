@@ -1,0 +1,30 @@
+https://leetcode.com/problems/sliding-window-maximum/submissions/1607834057/
+
+class Solution {
+public int[] maxSlidingWindow(int[] nums, int k) {
+// array for storing max element from each window of size k
+int[] ans = new int[nums.length-k+1];
+int i=0,j=0;
+// ds to store the elements to find max element from every window of size k
+Deque<Integer> dq = new ArrayDeque<>();
+while(j<nums.length){
+// if the last element in the deque is smaller than the current one it means we can remove this as this element will not contribute for max as current vala is se jada bada hai
+while(dq.size() > 0 && dq.peekLast()<nums[j]) dq.removeLast();
+// store the current element in the deque
+dq.addLast(nums[j]);
+// if window size is met then after that just store the front element of the queue
+if(j-i+1 == k){
+ans[i] = dq.peekFirst();
+j++;
+// will have to return this element as it will no onger be in the window
+if(dq.peekFirst() == nums[i]){
+dq.removeFirst();
+}
+i++;
+}else{
+j++;
+}
+}
+return ans;
+}
+}
