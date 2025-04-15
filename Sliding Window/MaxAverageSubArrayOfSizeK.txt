@@ -1,0 +1,35 @@
+Problem Link:- https://leetcode.com/problems/maximum-average-subarray-i/description/
+
+class Solution {
+    public double findMaxAverage(int[] nums, int k) {
+        int sum=0,i=0,j=0,n=nums.length;
+        //assigning this as min value so that if directly the answer comes in -ive it should handle the base case as well
+        double ans = Integer.MIN_VALUE;
+        // handling the base case if length of array is 1
+        if(n == 1){
+            return (double) nums[0]/k;
+        }
+
+        while(j < n){
+            // collecting the sum for the current window
+            sum+=nums[j];
+            // if the window size has not been reached keep on increasing the the window
+            if(j-i+1 < k){
+                j++;
+            }
+            // if the window size has reached
+            else if(j-i+1 == k){
+                ans = Math.max(ans,(double)sum/k);
+                j++;
+            }
+            // if the window has size has exceeded
+            else{
+                sum-=nums[i];
+                ans = Math.max(ans,(double)sum/k);
+                i++;
+                j++;
+            }
+        }
+        return ans;
+    }
+}
