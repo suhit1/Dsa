@@ -5,13 +5,26 @@ Brute Force Approach
 public int[] twoSum(int[] nums, int target) {
 int ans[] = new int[2];
 for(int i=0;i<nums.length;i++){
-for(int j=i+1;j<nums.length;j++){
-if(target == ( nums[i] + nums[j])){
-ans[0] = i;
-ans[1] = j;
-break;
-}  
- }
-}
-return ans;
+    for(int j=i+1;j<nums.length;j++){
+        if(target == ( nums[i] + nums[j])){
+            ans[0] = i;
+            ans[1] = j;
+            break;
+        }  
+    }
+    }
+    return ans;
+
+    // optimised approach
+		int ans[] =  new int[2];
+	    HashMap<Integer,Integer> map = new HashMap<Integer,Integer>();
+		for(int i=0;i<nums.length;i++){ 
+		    if(map.containsKey(target - nums[i])){
+		        ans[0] = map.get(target - nums[i]);
+		        ans[1] = i;
+		        break;
+		    }
+		    map.put(nums[i],i);
+		}
+        return ans;
 }
