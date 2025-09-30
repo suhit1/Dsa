@@ -1,0 +1,21 @@
+// Problem link :- https://leetcode.com/problems/best-time-to-buy-and-sell-stock/description/
+
+// Brute Force
+        int nums[] = {7,1,5,3,6,4};
+        int profit = Integer.MIN_VALUE;
+        for(int i=0;i<nums.length;i++){
+            for (int j=i+1;j<nums.length;j++){
+                profit = Math.max(profit,nums[j] - nums[i]);
+            }
+        }
+        System.out.println(profit);
+
+// optimised approach
+        int maxProfit= 0;
+        int nums[] = {7,1,5,3,6,4};
+        int minSoFar = nums[0];
+        for(int i=1;i<nums.length;i++){
+            minSoFar = Math.min(minSoFar,nums[i]);
+            maxProfit = Math.max(nums[i]-minSoFar,maxProfit);
+        }
+        System.out.println(maxProfit);
