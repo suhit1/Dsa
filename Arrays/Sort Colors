@@ -1,0 +1,59 @@
+// Problem Link :- https://leetcode.com/problems/sort-colors/
+
+// Brute Force
+
+        int nums[] = {2,0,2,1,1,0};
+        int zero=0,one=0,two=0;
+
+        // iterating to count
+        for(int el:nums){
+            if(el == 0){
+                zero++;
+            }
+            else if( el == 1){
+                one++;
+            }else{
+                two++;
+            }
+        }
+
+        int index = 0;
+        // putting zeroes first
+        for(int i=0;i<zero;i++){
+            nums[index++] = 0;
+        }
+
+        // putting one's
+        for (int i=0;i<one;i++){
+            nums[index++] = 1;
+        }
+
+        // putting two
+        for(int i=0;i<two;i++){
+            nums[index++] = 2;
+        }
+
+        for (int el:nums){
+            System.out.print(el+" ");
+        }
+
+
+// optimal approach -> Dutche national flag algo
+
+ int low = 0,mid=0,high=nums.length-1;
+        while(mid <= high){
+            if(nums[mid] == 0){
+                int temp = nums[mid];
+                nums[mid] = nums[low];
+                nums[low] = temp;
+                low++;
+                mid++;
+            }else if(nums[mid] == 1){
+                mid++;
+            }else{
+                int temp = nums[high];
+                nums[high] = nums[mid];
+                nums[mid] = temp;
+                high--;
+            }
+        }
