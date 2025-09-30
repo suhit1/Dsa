@@ -1,0 +1,78 @@
+Question Link :- https://leetcode.com/problems/3sum/description/
+
+        // Brute Force
+        int nums[] = {-1,0,1,2,-1,-4};
+        List<List<Integer>> ans = new ArrayList<List<Integer>>();
+        Set<List<Integer>> set = new HashSet<List<Integer>>();
+
+        for(int i=0;i<nums.length;i++){
+            for(int j=i+1;j<nums.length;j++){
+                for(int k=j+1;k<nums.length;k++){
+                    if(nums[i] + nums[j] + nums[k] == 0){
+                        int tripletArray[] = new int[3];
+                        tripletArray[0] = nums[i];
+                        tripletArray[1] = nums[j];
+                        tripletArray[2] = nums[k];
+                        Arrays.sort(tripletArray);
+                        List<Integer> list = Arrays.stream(tripletArray).boxed().toList();
+                        set.add(list);
+                    }
+                }
+            }
+        }
+        for(List<Integer> l:set){
+            ans.add(l);
+        }
+        return ans;
+
+        // Better Approach
+        int nums[] = {-100,-70,-60,110,120,130,160};
+        List<List<Integer>> ans = new ArrayList<List<Integer>>();
+        Set<List<Integer>> set = new HashSet<List<Integer>>();
+        for(int i=0;i<nums.length;i++){
+            Set<Integer> hashSet = new HashSet<Integer>();
+            for(int j=i+1;j< nums.length;j++){
+                int thirdElement = - (nums[i] + nums[j]);
+                if(hashSet.contains(thirdElement)){
+                    List<Integer> list = new ArrayList<Integer>();
+                    list.add(nums[i]);
+                    list.add(nums[j]);
+                    list.add(thirdElement);
+                    Collections.sort(list);
+                    set.add(list);
+                }
+                hashSet.add(nums[j]);
+            }
+        }
+        for(List<Integer> el:set){
+            ans.add(el);
+        }
+        return ans;
+        //optimised approach
+        List<List<Integer>> finalList = new ArrayList<>();
+        if(nums.length<3) return finalList;
+        Arrays.sort(nums);
+        for(int i=0;i<nums.length;i++){
+            if(i!=0 && nums[i] == nums[i-1]) continue;
+            int j= i+1;
+            int k=nums.length-1;
+            while(j < k){
+                int sum = nums[i]+nums[j]+nums[k];
+                if(sum < 0){
+                    j++;
+                }else if(sum > 0){
+                    k--;
+                }else{
+                    List<Integer> triplet = new ArrayList<>();
+                    triplet.add(nums[i]);
+                    triplet.add(nums[j]);
+                    triplet.add(nums[k]);
+                    finalList.add(triplet);
+                    j++;
+                    k--;
+                    while(j<k && nums[j] == nums[j-1]) j++;
+                    while(j<k && nums[k] == nums[k+1]) k--;
+                }
+            }
+        }
+         return ans;
