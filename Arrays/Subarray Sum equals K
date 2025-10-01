@@ -1,0 +1,21 @@
+// Problem link :- https://leetcode.com/problems/subarray-sum-equals-k/submissions/1788323928/
+
+// brute
+
+find all the subarray with sum equals k and count them
+
+// optimal
+
+int sum = 0;
+        int ans = 0;
+        // map for storing sum and its freq
+        HashMap<Integer,Integer> map = new HashMap<>();
+        // this is required to store because suppose a sum will be 3 and k = 3 so in this case
+        // sum - k = 0 therefore this is required
+        map.put(0,1);
+        for(int el:nums){
+            sum += el;
+            ans += map.getOrDefault(sum - k,0);
+            map.put(sum,map.getOrDefault(sum,0)+1);
+        }
+        return ans;
