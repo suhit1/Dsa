@@ -1,0 +1,87 @@
+// Find Repeat and Missing Number link :- https://www.youtube.com/watch?v=2D0D8HE6uak
+
+
+// Brute Force
+        int nums[] = {4,3,6,2,1,1};
+        int repeat = 0, missing = 0;
+
+        for(int i=1;i<=nums.length;i++){
+            int count  =0;
+            for(int j=0;j<nums.length;j++){
+                if(nums[j] == i){
+                    count++;
+                }
+            }
+            if (count == 2) {
+                repeat = i;
+            }
+
+            if(count == 0){
+                missing = i;
+            }
+        }
+
+        System.out.println("Missing number :- "+missing);
+        System.out.println("Repeat number :- "+repeat);
+
+
+// Better Approach -? will be using a hash array to keep a count
+        int[] nums = {4,3,6,2,1,1};
+        int[] hash = new int[nums.length+1];
+        int missing = 0,repeat = 0;
+        for(int i=0;i<nums.length;i++){
+            hash[nums[i]]++;
+        }
+
+        for(int i=1;i<hash.length;i++){
+            if(hash[i] == 2){
+                repeat = i;
+            }
+            if(hash[i] == 0){
+                missing = i;
+            }
+        }
+
+
+
+        System.out.println("Missing number :- "+missing);
+        System.out.println("Repeat number :- "+repeat);
+
+// optimised approach
+
+        // logic x-y = something eqn 1
+        // logic x^2 - y^2 =  something
+        // on solving both will get x & y
+        // where x is repeating character and y is missing
+        int[] a = {4,3,6,2,1,1};
+        long n = a.length; // size of the array
+        // Find Sn and S2n:
+        long SN = (n * (n + 1)) / 2;
+        long S2N = (n * (n + 1) * (2 * n + 1)) / 6;
+
+        // Calculate S and S2:
+        long S = 0, S2 = 0;
+        for (int i = 0; i < n; i++) {
+            S += a[i];
+            S2 += (long)a[i] * (long)a[i];
+        }
+
+        //S-Sn = X-Y:
+        long val1 = S - SN;
+
+        // S2-S2n = X^2-Y^2:
+        long val2 = S2 - S2N;
+
+        //Find X+Y = (X^2-Y^2)/(X-Y):
+        val2 = val2 / val1;
+
+        //Find X and Y: X = ((X+Y)+(X-Y))/2 and Y = X-(X-Y),
+        // Here, X-Y = val1 and X+Y = val2:
+        long x = (val1 + val2) / 2;
+        long y = x - val1;
+
+        int[] ans = {(int)x, (int)y};
+
+        for (int el: ans){
+            System.out.println(el);
+        }
