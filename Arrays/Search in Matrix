@@ -1,0 +1,42 @@
+// Problem link :- https://leetcode.com/problems/search-a-2d-matrix/
+
+// Brute
+
+int matrix[][] = {{1,3,5,7},{10,11,16,20},{23,30,34,60}},target=60;
+        boolean found = false;
+        for(int i=0;i<matrix.length;i++){
+            for(int j=0;j<matrix[0].length;j++){
+                if(matrix[i][j] == target){
+                    found = true;
+                    break;
+                }
+            }
+        }
+
+        if(found == true)
+            System.out.println("Found");
+        else
+            System.out.println("Not Present");
+
+// optimised
+int matrix[][] = {{1,3,5,7},{10,11,16,20},{23,30,34,60}},target=3;
+        boolean found = false;
+        int i=0,j=matrix[0].length-1;
+        while(i < matrix.length && j>=0){
+
+            int el = matrix[i][j];
+
+            if(el == target){
+                found = true;
+                break;
+            }
+            else if(el > target){
+                j--;
+            }
+            else{
+                i++;
+            }
+
+        }
+
+        System.out.println("Found :- "+found);
