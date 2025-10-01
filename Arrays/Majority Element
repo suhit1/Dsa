@@ -1,0 +1,65 @@
+// problem link :-
+
+// Brute Force
+        int[] arr = {2, 2, 1, 1, 1, 2, 2};
+        int n = arr.length;
+
+        for (int i = 0; i < n; i++) {
+            int cnt = 0;
+            for (int j = 0; j < n; j++) {
+                // counting the frequency of v[i]
+                if (arr[j] == arr[i]) {
+                    cnt++;
+                }
+            }
+
+            // check if frquency is greater than n/2:
+            if (cnt > (n / 2)) {
+                System.out.println(arr[i]);
+                break;
+            }
+        }
+
+// Better Approach
+
+// Brute Force
+        int[] arr = {2, 2, 1, 1, 1, 2, 2};
+        int n = arr.length;
+        //declaring a map:
+        HashMap<Integer, Integer> mpp = new HashMap<>();
+
+        //storing the elements with its occurnce:
+        for (int i = 0; i < n; i++) {
+            int value = mpp.getOrDefault(arr[i], 0);
+            mpp.put(arr[i], value + 1);
+        }
+
+        //searching for the majority element:
+        for (Map.Entry<Integer,Integer> entry: mpp.entrySet()){
+            if(entry.getValue() > n/2){
+                System.out.println("Majority element :- "+entry.getValue());
+                break;
+            }
+        }
+
+// optimised
+
+// Moore's voting algorythm
+        int el = 0,count=0;
+
+        for(int i=0;i<arr.length;i++){
+            if(count == 0){
+                el = arr[i];
+                count++;
+            }
+            else if(el == arr[i]){
+                count++;
+            }
+            else{
+                count--;
+            }
+        }
+        // here we can verify that whether our el vala element is majority or not by counting its frequency
+        // but this is only required if hmara question mei given ho ki nhi hoga value to -1 return kr dege
+        // but if told ki it will surely exist then simply return el
+        System.out.println(el);
