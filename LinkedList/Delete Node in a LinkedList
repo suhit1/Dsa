@@ -1,0 +1,17 @@
+// Problem Link :- https://leetcode.com/problems/delete-node-in-a-linked-list/description/
+
+// Brute
+
+ListNode prev = null;
+        while(node.next!=null){
+            node.val = node.next.val;
+            prev = node;
+            node=node.next;
+        }
+        prev.next=null;
+
+
+// optimised
+
+node.val = node.next.val ;
+node.next = node.next.next ;
