@@ -9,7 +9,7 @@ Simply traverse both the linkedlist and store the elements inside a string
 
 like str1 = "243"
      str2 = "564"
-aftre this parse both of them into int and add them
+after this parse both of them into int and add them
 will get 807 and now again convert this into String "807" and then reverse this make it 708
 now after this make a new linkedlist and put 708 in it this is our answer
 
