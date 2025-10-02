@@ -1,0 +1,19 @@
+// problem link :- https://leetcode.com/problems/middle-of-the-linked-list/description/
+
+// brute
+
+just count the no. of element in the linked-list
+if the element count is even then simply even/2 +1 vala element will be middle one
+if the element count is odd then simply (odd+1)/2 vala element will be middle one
+
+// optimised
+
+will be using slow and fast pointer concept
+
+ListNode slow = head;
+        ListNode fast = head.next;
+        while(fast!=null && fast.next!=null){
+            slow = slow.next;
+            fast = fast.next.next;
+        }
+        return fast == null ? slow : slow.next;
