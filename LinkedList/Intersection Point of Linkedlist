@@ -1,0 +1,39 @@
+// Problem link :- https://leetcode.com/problems/intersection-of-two-linked-lists/
+
+// Brute
+
+use a HasSet<Node> to store values traverse both the linkedlists and if duplicate found
+that will be the intersection point if not found then return null
+
+// Better
+
+traverse both the linked list and count their lengths individually
+after that calculate diff and then uske baad utna hi point aage leja pointer krke long list se and uske baad
+jaha pe match kr jai vaha pe stop the flow
+
+// optimal
+
+
+public class Solution {
+    public ListNode getIntersectionNode(ListNode headA, ListNode headB) {
+        // so basically in this question we will iterate over both the linked list simultaneously and once the one linkedlist
+        // is over will shift the pointer to th other on in this was both will start from same pointer and will meet at the
+        // common node if there is an intersection present
+        ListNode temp1 = headA;
+        ListNode temp2 = headB;
+        while(headA!=null || headB!=null){
+            if(headA == null){
+                headA = temp2;
+            }
+            if(headB == null){
+                headB = temp1;
+            }
+            if(headA == headB) return headA;
+
+            headA = headA.next;
+            headB = headB.next;
+        }
+        // no intersection point found
+        return null;
+    }
+}
