@@ -1,0 +1,25 @@
+// problem link :- https://leetcode.com/problems/linked-list-cycle/description/
+
+// Brute
+
+take a stack and puch all the elements if found return if null tk pohuch gye mtlb ki there is no circle in linkedlist
+
+//optimal
+
+public class Solution {
+    public boolean hasCycle(ListNode head) {
+        // will be using the concept of slow and fat pointer here
+        if(head == null || head.next==null) return false;
+        ListNode slow = head;
+        ListNode fast = head;
+        while(fast != null && fast.next != null){
+            slow = slow.next;
+            fast = fast.next.next;
+            if(slow == fast){
+                 return true;
+            }
+        }
+        // it does not contain a cycle
+        return false;
+    }
+}
