@@ -1,0 +1,42 @@
+// Problem link :- https://leetcode.com/problems/merge-two-sorted-lists/
+
+// brute force
+
+take a stack put all the elements into a linkedlist
+after this pop element one by one from stack and start forming a new linkedlistwith these reversed elements
+
+OR
+
+take an array list usme both linked list ke elements put krke just sort it and push it
+
+// optimised
+
+class Solution {
+    public ListNode mergeTwoLists(ListNode list1, ListNode list2) {
+
+        ListNode dummy = new ListNode(0);
+        ListNode temp = dummy;
+
+        while(list1 != null && list2 != null){
+
+            if(list1.val <= list2.val){
+                temp.next = list1;
+                list1 = list1.next;
+            }
+            else{
+                temp.next = list2;
+                list2 = list2.next;
+            }
+
+            temp = temp.next;
+
+        }
+
+        if(list1 == null){
+            temp.next = list2;
+        }else{
+        temp.next = list1;
+        }
+        return dummy.next;
+    }
+}
