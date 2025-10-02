@@ -1,0 +1,19 @@
+// Problem link :- https://leetcode.com/problems/reverse-linked-list/
+
+// Brute
+
+Take an empty stack and usme elements dalte rh baad mei usko pop krte time pe just replace all the elements with
+new one
+
+// Optimised
+
+if(head == null) return head;
+        ListNode prev = null;
+        ListNode temp = null;
+        while(head != null){
+            temp = head.next;
+            head.next = prev;
+            prev = head;
+            head = temp;
+        }
+        return prev;
