@@ -1,0 +1,32 @@
+// problem link :- https://leetcode.com/problems/remove-nth-node-from-end-of-list/description/
+
+// brute
+
+Basically just traverse the loop first and find out total length of linkedlist
+after that like if you have to find the 2nd last element to keep a counter from start and find the occurence
+
+// optimised
+
+class Solution {
+    public ListNode removeNthFromEnd(ListNode head, int n) {
+        if(n==0 || head==null){
+            return head;
+        }
+        ListNode dummy = new ListNode();
+        dummy.next = head;
+        ListNode fast = dummy;
+        ListNode slow = dummy;
+        // so bascially we will be first traversing upto given n
+        while(n!=0){
+            fast = fast.next;
+            n--;
+        }
+        // after this we can take use of our slow & fast pointer concept and using this we can solve the problem in one single iteration
+        while(fast.next!=null){
+            slow = slow.next;
+            fast = fast.next;
+        }
+        slow.next = slow.next.next;
+        return dummy.next;
+    }
+}
