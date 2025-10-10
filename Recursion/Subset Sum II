@@ -1,0 +1,28 @@
+// Problem link : https://leetcode.com/problems/subsets-ii/description/
+
+// Brute :-
+
+1) just solve it as Subset Sum I
+2) but when having final ans just store all the subset sum into a set and duplicates will be removed
+3) again store all the elements of the set back to a list
+
+//optimised
+
+class Solution {
+    public List<List<Integer>> subsetsWithDup(int[] nums) {
+        Arrays.sort(nums);
+        List<List<Integer>> ans = new ArrayList<>();
+        findUniqueSubSets(0,nums,new ArrayList<>(),ans);
+        return ans;
+    }
+
+    void findUniqueSubSets(int ind,int[] nums,ArrayList<Integer> ds,List<List<Integer>> ans){
+        ans.add(new ArrayList<>(ds));
+        for(int i=ind;i<nums.length;i++){
+            if(i!=ind && nums[i] == nums[i-1]) continue;
+            ds.add(nums[i]);
+            findUniqueSubSets(i+1,nums,ds,ans);
+            ds.remove(ds.size() -1);
+        }
+    }
+}
