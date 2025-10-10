@@ -1,0 +1,32 @@
+// Problem link :- https://leetcode.com/problems/combination-sum-ii/
+
+// Brute :-
+
+1) Just find out the Combination Sum and after that store it in Set in last to get all the unique Combination
+
+// Optimised
+
+class Solution {
+    public List<List<Integer>> combinationSum2(int[] candidates, int target) {
+        List<List<Integer>> ansList = new ArrayList<>();
+        Arrays.sort(candidates);
+        findCombinationSum(0,candidates,target,new ArrayList<>(),ansList);
+        return ansList;
+    }
+
+    void findCombinationSum(int ind,int[] candidates,int target,List<Integer> ds,List<List<Integer>> ansList){
+        if(target == 0){
+            ansList.add(new ArrayList<>(ds));
+            return;
+        }
+
+        for(int i=ind;i<candidates.length;i++){
+            if(i > ind && candidates[i] == candidates[i-1]) continue;
+            if(candidates[i] > target) break;
+
+            ds.add(candidates[i]);
+            findCombinationSum(i+1,candidates,target - candidates[i],ds,ansList);
+            ds.remove(ds.size()-1);
+        }
+    }
+}
