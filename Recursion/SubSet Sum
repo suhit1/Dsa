@@ -1,0 +1,50 @@
+// Problem link :- https://www.youtube.com/watch?v=rYkfBRtMJr8&list=PLgUwDviBIf0p4ozDR_kJJkONnb1wdx2Ma&index=53
+
+// Brute :-
+
+1) Generate all the subset sum
+2) put all the subset into an array and sort the array after that
+
+// Optimised
+
+
+
+import java.lang.reflect.Array;
+import java.util.ArrayList;
+import java.util.Collections;
+
+public class Test {
+    public static void main(String[] args) {
+        ArrayList< Integer > arr = new ArrayList < > ();
+        arr.add(3);
+        arr.add(1);
+        arr.add(2);
+        ArrayList < Integer > ans = subsetSums(arr, arr.size());
+        Collections.sort(ans);
+        System.out.println("The sum of each subset is ");
+        for (int i = 0; i < ans.size(); i++)
+            System.out.print(ans.get(i) + " ");
+    }
+
+    static ArrayList<Integer> subsetSums(ArrayList<Integer> arr,int N){
+
+        ArrayList<Integer> ans = new ArrayList<>();
+        subsetSumHelper(0,0,arr,N,ans);
+        return ans;
+    }
+
+    static void subsetSumHelper(int ind,int sum,ArrayList<Integer> arr,int N, ArrayList<Integer> ans){
+
+        if( ind == N){
+            ans.add(sum);
+            return;
+        }
+
+        // Considered for picking
+        subsetSumHelper(ind+1,sum + arr.get(ind),arr,N,ans);
+
+        // Considered for not picking
+        subsetSumHelper(ind+1,sum,arr,N,ans);
+
+    }
+}
