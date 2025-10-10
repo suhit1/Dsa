@@ -1,0 +1,32 @@
+// Problem Solution :- https://leetcode.com/problems/rotate-list/description/
+
+// Brute
+
+1) Take an array and store all the elements of linked list in that array
+2) Later on rotate this array as well by k right-wise
+3) After put all this array elements in the same order back in linked list
+
+// Optimised
+
+class Solution {
+    public ListNode rotateRight(ListNode head, int k) {
+        if(head == null||head.next == null||k == 0) return head;
+    //calculating length
+    ListNode temp = head;
+    int length = 1;
+    while(temp.next != null) {
+        ++length;
+        temp = temp.next;
+    }
+    //link last node to first node
+    temp.next = head;
+    k = k%length; //when k is more than length of list
+    int end = length-k; //to get end of the list
+    while(end--!=0) temp = temp.next;
+    //breaking last node link and pointing to NULL
+    head = temp.next;
+    temp.next = null;
+
+    return head;
+    }
+}
