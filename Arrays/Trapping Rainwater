@@ -1,0 +1,68 @@
+// Problem link :- https://leetcode.com/problems/trapping-rain-water/description/
+
+// Video Solution :- https://www.youtube.com/watch?v=1_5VuquLbXg
+
+// Brute
+
+1) Take Prefix & Suffix array to store the max height at left and right of current building
+2) Now the water which will be stored on the top of the building will be at max the min of max height of building
+present at the lef & right of this current building
+
+
+// better solution
+        int[] prefix = new int[height.length];
+        int[] suffix = new int[height.length];
+        int max = 0;
+
+        // storing the prefix heights for current element
+        for(int i=0;i<height.length;i++){
+            // Storing the max prefix height for current element
+            max = Math.max(max,height[i]);
+            prefix[i] = max;
+        }
+        max = 0;
+
+        // storing the suffix heights for current element
+        for(int i=height.length-1;i>=0;i--){
+             // Storing the max suffix height for current element
+             max = Math.max(max,height[i]);
+             suffix[i] = max;
+        }
+
+        int trappedRainWater = 0;
+        for(int i=0;i<height.length;i++){
+           int  waterTrapped=Math.min(prefix[i],suffix[i]) - height[i];
+            trappedRainWater = trappedRainWater + waterTrapped;
+        }
+        return trappedRainWater;
+
+// Optimised Solution
+
+class Solution {
+    public int trap(int[] height) {
+
+        //optimised solution
+        int n = height.length;
+        int left = 0, right = n - 1;
+        int res = 0;
+        int maxLeft = 0, maxRight = 0;
+        while (left <= right) {
+            if (height[left] <= height[right]) {
+                if (height[left] >= maxLeft) {
+                    maxLeft = height[left];
+                } else {
+                    res += maxLeft - height[left];
+                }
+                left++;
+            } else {
+                if (height[right] >= maxRight) {
+                    maxRight = height[right];
+                } else {
+                    res += maxRight - height[right];
+                }
+                right--;
+            }
+        }
+        return res;
+    }
+}
