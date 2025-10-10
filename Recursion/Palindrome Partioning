@@ -1,0 +1,36 @@
+// Problem link :- https://leetcode.com/problems/palindrome-partitioning/submissions/1797426522/
+
+
+class Solution {
+    public List<List<String>> partition(String s) {
+        List<List<String>> ansList = new ArrayList<>();
+        findPalindromePartioning(0,new ArrayList<>(),s,ansList);
+        return ansList;
+    }
+
+    void findPalindromePartioning(int ind,List<String> path,String s,List<List<String>> ansList){
+        if(ind == s.length()){
+            ansList.add(new ArrayList<>(path));
+            return;
+        }
+
+        for(int i=ind;i<s.length();i++){
+            if(isPalindrome(s,ind,i)){
+                path.add(s.substring(ind,i+1));
+                findPalindromePartioning(i+1,path,s,ansList);
+                path.remove(path.size()-1);
+            }
+        }
+    }
+
+    boolean isPalindrome(String s,int start,int end){
+        while(start < end){
+            if(s.charAt(start) != s.charAt(end)) return false;
+            else{
+                start++;
+                end--;
+            }
+        }
+        return true;
+    }
+}
