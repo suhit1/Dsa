@@ -1,0 +1,24 @@
+// Problem Link :- https://leetcode.com/problems/max-consecutive-ones/description/
+
+// Brute :-
+
+1) Take two for loops inner one and bs via that find the kitni baar withoutbreaking the series 1 a rkha hai
+
+
+// optimised
+
+class Solution {
+    public int findMaxConsecutiveOnes(int[] nums) {
+        int ans=0,max=Integer.MIN_VALUE;
+        for(int i=0;i<nums.length;i++){
+            if(nums[i] == 0){
+                ans = 0;
+            }
+            else{
+                ans++;
+                max = Math.max(ans,max);
+            }
+        }
+        return max == Integer.MIN_VALUE ? 0 : max;
+    }
+}
