@@ -1,0 +1,62 @@
+// Problem Link :- https://leetcode.com/problems/copy-list-with-random-pointer/
+
+// Video Solution :- https://www.youtube.com/watch?v=q570bKdrnlw
+
+// Brute
+
+1) Just take a hashmap
+2) traverse the original linkedlist and store the original node with the newly created copy node
+3) after this one all the nodes are created and stored in HashMap
+4) after this again traverse the original linkedlist and this time we will be having the original node as key and
+value as newly created node so now we can create a link for this
+
+// optimised
+
+/*
+// Definition for a Node.
+class Node {
+    int val;
+    Node next;
+    Node random;
+
+    public Node(int val) {
+        this.val = val;
+        this.next = null;
+        this.random = null;
+    }
+}
+*/
+
+class Solution {
+    public Node copyRandomList(Node head) {
+        Node curr=head;
+        Node curr_next=head;
+        while(curr!=null){
+           curr_next=curr.next;
+            Node copy = new Node(curr.val);
+            curr.next=copy;
+            copy.next=curr_next;
+           curr=curr_next;
+        }
+        // to insert random refernce in copy list
+        curr=head;
+        while(curr!=null){
+            if(curr.random!=null)
+              curr.next.random=curr.random.next;
+            curr=curr.next.next;
+        }
+        // now extracting the copy list from  original edited list
+        curr=head;
+        curr_next=head;
+        Node dummy=new Node(0);
+        Node temp=dummy;
+        while(curr!=null){
+            curr_next=curr.next.next;
+            temp.next=curr.next;
+            temp=temp.next;
+            curr.next=curr_next;
+            curr=curr.next;
+        }
+        return dummy.next;
+    }
+}
