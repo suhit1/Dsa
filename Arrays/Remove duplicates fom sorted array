@@ -1,0 +1,41 @@
+// Problem link :- https://leetcode.com/problems/remove-duplicates-from-sorted-array/description/
+
+// Brute Force :- just take a linked-hashmap to store all the values why??
+because simple map does not takes in order but linked hash map maintains the insertion order
+
+        int[] nums = {0,0,1,1,1,2,2,3,3,4};
+        LinkedHashMap<Integer,Integer> map = new LinkedHashMap<>();
+        for(int i=0;i<nums.length;i++){
+            map.put(nums[i],map.getOrDefault(nums[i],0)+1);
+        }
+        int i=0;
+        for (Map.Entry<Integer,Integer> entry:map.entrySet()){
+            nums[i++] = entry.getKey();
+        }
+
+        for(int el:nums){
+            System.out.println(el);
+        }
+        System.out.println("Map Size "+map.size());
+
+
+// optimised approach
+
+Take two pointersapproach
+i = 0, j = 1
+from  this approach like if a[i] == a[j] will keep moving j forward
+but if not equal will put a[j] at a[i+1]
+
+class Solution {
+    public int removeDuplicates(int[] nums) {
+        int i=0,j=1;
+        while(j<nums.length){
+            if(nums[i]!=nums[j]){
+                nums[i+1] = nums[j];
+                i++;
+            }
+            j++;
+        }
+        return i+1;
+    }
+}
