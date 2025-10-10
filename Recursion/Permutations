@@ -1,7 +1,6 @@
 // Problem Link :- https://leetcode.com/problems/palindrome-partitioning/submissions/1797426522/
 
 
-// brute force pproach
 
 class Solution {
     public List<List<Integer>> permute(int[] nums) {
@@ -39,7 +38,3 @@ class Solution {
         }
     }
 }
-
-
-
-
