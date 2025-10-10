@@ -1,0 +1,45 @@
+// Problem Link :- https://leetcode.com/problems/palindrome-partitioning/submissions/1797426522/
+
+
+// brute force pproach
+
+class Solution {
+    public List<List<Integer>> permute(int[] nums) {
+        // ans list
+        List<List<Integer>> ansList = new ArrayList<>();
+        // freq array to track picked element
+        boolean[] freq = new boolean[nums.length];
+        findPermute(new ArrayList<>(),ansList,nums,freq);
+        return ansList;
+    }
+
+    // method to find all the permutation
+    void findPermute(List<Integer> ds,List<List<Integer>> ansList,int[] arr, boolean[] freq){
+        // base condition if our list size reaches array size means we have got one permutation
+        if(ds.size() == arr.length){
+            ansList.add(new ArrayList<>(ds));
+            return;
+        }
+        // loop for traversing array
+        for(int i=0;i<arr.length;i++){
+            // check if element is not travelled
+           if(freq[i] ==  false){
+
+            // mark the element as true
+                freq[i] = true;
+                // add in list since we are considering it to be a part of array
+                ds.add(arr[i]);
+                findPermute(ds,ansList,arr,freq);
+
+                // in backtracking unmark the array as we will be removing this element from list
+                freq[i]=false;
+                // element removed
+                ds.remove(ds.size()-1);
+           }
+        }
+    }
+}
+
+
+
+
