@@ -1,0 +1,26 @@
+// Problem Link :- https://www.youtube.com/watch?v=mVg9CfJvayM&list=PLgUwDviBIf0p4ozDR_kJJkONnb1wdx2Ma&index=49
+
+
+
+public class Test {
+    public static void main(String[] args) {
+
+        int v = 121;
+        int coins[] = {1, 2, 5, 10, 20, 50, 100, 500, 1000};
+        int n = coins.length-1,ans=0;
+        while(v > 0 && n>=0){
+
+            if(coins[n] <= v){
+                ans++;
+                v = v - coins[n];
+            }
+            else {
+                n--;
+            }
+
+        }
+        System.out.println(ans);
+    }
+}
+
+
