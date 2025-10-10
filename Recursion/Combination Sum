@@ -1,0 +1,29 @@
+// Problem link :- https://leetcode.com/problems/combination-sum/submissions/1797383493/
+
+// video solution :- https://www.youtube.com/watch?v=OyZFFqQtu98&list=PLgUwDviBIf0p4ozDR_kJJkONnb1wdx2Ma&index=53
+
+
+class Solution {
+    public List<List<Integer>> combinationSum(int[] candidates, int target) {
+        List<List<Integer>> ansList = new ArrayList<>();
+        findCombinationSum(0,candidates,target,new ArrayList<>(),ansList);
+        return ansList;
+    }
+
+    void findCombinationSum(int ind,int[] candidates,int target,List<Integer> ds,List<List<Integer>> ansList){
+        if(ind == candidates.length){
+            if(target == 0) {
+                ansList.add(new ArrayList<>(ds));
+            }
+            return;
+        }
+        if(candidates[ind] <= target){
+              // will be picking this index
+              ds.add(candidates[ind]);
+            findCombinationSum(ind,candidates,target - candidates[ind],ds,ansList);
+            ds.remove(ds.size()-1);
+        }
+        // will not be picking this index
+        findCombinationSum(ind+1,candidates,target,ds,ansList);
+    }
+}
