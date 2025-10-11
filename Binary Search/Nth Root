@@ -1,0 +1,62 @@
+// Problem Link :- https://takeuforward.org/data-structure/nth-root-of-a-number-using-binary-search/
+
+// Brute
+
+import java.util.*;
+
+class Test {
+    public static void main(String[] args) {
+        int n = 3,m=27;
+
+        for(int i=1;i<=m;i++){
+            double nthRoot = Math.pow(i,n);
+            if(nthRoot == m){
+                System.out.println(i);
+                break;
+            }
+            else if(nthRoot  > m){
+                System.out.println(-1);
+                break;
+            }
+        }
+    }
+}
+
+
+// Optimised
+
+import java.util.*;
+
+class Test {
+    public static void main(String[] args) {
+        int n = 4,m = 69;
+        int low = 1,high = 27;
+
+        // Binary Search
+        while(low <= high){
+            int mid = (low + high)/2;
+            // find if root found
+            if(root(n,mid) == m){
+                System.out.println("Found");
+                break;
+            }
+            else if(root(n,mid) > m){
+                high = mid - 1;
+            }
+            else{
+                low = mid +1 ;
+            }
+        }
+        if(low > high){
+            System.out.println("Not Found!");
+        }
+    }
+
+    static  int root(int n,int num){
+        int ans = num;
+        for(int i=1;i<n;i++){
+            ans = ans * num;
+        }
+        return ans;
+    }
+}
