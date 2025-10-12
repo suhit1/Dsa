@@ -1,0 +1,33 @@
+// Problem Link :- https://www.youtube.com/watch?v=YbkELwnGRdo&list=PL_z_8CaSLPWeYfhtuKHj-9MpYb6XQJ_f2&index=3
+
+
+// Brute Force
+
+Do a linear search operation
+
+// Optimised
+
+import java.util.*;
+
+class Test {
+    public static void main(String[] args) {
+        int[] arr = {20,17,15,14,13,12,10,9,8,4};
+        int low = 0,high=arr.length - 1,target=3;
+        while( low <= high ){
+            int mid = (low+high)/2;
+            // check if element is present or not ad mid-position
+            if(arr[mid] == target){
+                System.out.println("Found!");
+                break;
+            }
+            else if(arr[mid] < target){
+                high = mid - 1;
+            }
+            else{
+                low = mid + 1;
+            }
+        }
+
+        System.out.println("Not Found!");
+    }
+}
