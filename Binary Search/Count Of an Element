@@ -1,0 +1,56 @@
+// Problem Link :- https://www.youtube.com/watch?v=Ru_HhBFV3Xo&list=PL_z_8CaSLPWeYfhtuKHj-9MpYb6XQJ_f2&index=6
+
+// Brute :- Linear search and maintain a counter
+
+// Optimised -> find out first and last position of occurence an then can find the frequency
+
+import java.util.*;
+
+class Test {
+    public static void main(String[] args) {
+        int[] arr = {2,4,10,10,10,18,20};
+        int target = 10;
+        int firstOccurence = firstOccurence(arr,target);
+        int lastOccurence = lastOccurence(arr,target);
+
+        System.out.println(lastOccurence - firstOccurence + 1);
+    }
+
+    static int firstOccurence(int[] arr,int target){
+        int low = 0,high=arr.length - 1,ans=Integer.MAX_VALUE;
+        while( low <= high ){
+            int mid = (low+high)/2;
+            // check if element is present or not ad mid-position
+            if(arr[mid] == target){
+                ans = Math.min(ans,mid);
+                high = mid - 1;
+            }
+            else if(arr[mid] < target){
+                low = mid + 1;
+            }
+            else{
+                high = mid - 1;
+            }
+        }
+        return ans;
+    }
+
+    static int lastOccurence(int[] arr,int target){
+        int low=0,high=arr.length-1,ans=Integer.MIN_VALUE;
+        while(low<=high){
+            int mid = (low+high)/2;
+            // check if element is present
+            if(arr[mid] == target){
+                ans = Math.max(ans,mid);
+                low = mid+1;
+            }
+            else if(arr[mid] < target){
+                low = mid + 1;
+            }
+            else{
+                high = mid - 1;
+            }
+        }
+        return ans;
+    }
+}
